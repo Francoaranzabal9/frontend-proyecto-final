@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
+
+  const [user, setUser] = useState(null);
   return (
     <nav>
       <Link to="/">Nuestros productos</Link>

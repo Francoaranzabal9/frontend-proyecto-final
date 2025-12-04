@@ -53,8 +53,8 @@ const Home = () => {
     fetchPerfumes()
   }, [])
 
-  const deleteProduct = async (idPerfume) => {
-    setSrverResponse({
+  const deletePerfume = async (idPerfume) => {
+    setServerResponse({
       ...serverResponse,
       error: {
         delete: null,
@@ -96,6 +96,13 @@ const Home = () => {
     setSelectedPerfume(p)
   }
 
+  const handleChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value
+    })
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const query = new URLSearchParams()
@@ -104,17 +111,16 @@ const Home = () => {
     if (filters.brand) query.set("brand", filters.brand)
     if (filters.concentration) query.set("concentration", filters.concentration)
     if (filters.genre) query.set("genre", filters.genre)
-    if (filters.stock) query.set("stock", filters.stock)
     if (filters.volumeMl) query.set("volumeMl", filters.volumeMl)
-    if (filters.price) query.set("price", filters.price)
+    if (filters.minPrice) query.set("minPrice", filters.minPrice)
+    if (filters.maxPrice) query.set("maxPrice", filters.maxPrice)
     if (filters.description) query.set("description", filters.description)
     if (filters.image) query.set("image", filters.image)
 
     fetchPerfumes(query.toString())
-
   }
 
-  handleResetFilters = () => {
+  const handleResetFilters = () => {
     setFilters({
       name: "",
       brand: "",
@@ -122,15 +128,132 @@ const Home = () => {
       genre: "",
       stock: true,
       volumeMl: "",
-      price: "",
+      minPrice: "",
+      maxPrice: "",
       description: "",
       image: "",
     })
+    fetchPerfumes()
   }
 
   return (
     <Layout>
-      <h1>Home</h1>
+      <h1 className="page-banner">Nuestros productos</h1>
+
+      <section className="page-section">
+        <p>Bienvenido {user && user.name} a nuestra tienda. Aquí encontrarás una amplia variedad de productos diseñados para satisfacer
+          tus necesidades. Nuestro compromiso es ofrecer calidad y confianza.
+        </p>
+      </section>
+
+      <div className="main-content">
+        <aside className="filters-sidebar">
+          <div className="filters-form">
+            <form onSubmit={handleSubmit} className="search-form">
+              <div className="filters-grid">
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Nombre"
+                  name="name"
+                  value={filters.name}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Marca"
+                  name="brand"
+                  value={filters.brand}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Concentración"
+                  name="concentration"
+                  value={filters.concentration}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Género"
+                  name="genre"
+                  value={filters.genre}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Volumen (ml)"
+                  name="volumeMl"
+                  value={filters.volumeMl}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Precio minimo"
+                  name="minPrice"
+                  value={filters.minPrice}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Precio maximo"
+                  name="maxPrice"
+                  value={filters.maxPrice}
+                  onChange={handleChange}
+                />
+                <input
+                  className="filter-input"
+                  type="text"
+                  placeholder="Descripción"
+                  name="description"
+                  value={filters.description}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-actions">
+                <button type="submit" className="btn btn-primary">Buscar</button>
+                <button type="button" onClick={handleResetFilters} className="btn btn-secondary">Resetear</button>
+              </div>
+            </form>
+          </div>
+        </aside>
+
+        <section className="perfumes-grid">
+          {
+            perfumes.map((p) => (
+              <div key={p._id} className="perfume-card">
+                <div className="card-image-container">
+                  <img src={`http://localhost:2222/perfumes/${p.image}`} alt={`Imagen de ${p.name}`} className="perfume-image" />
+                </div>
+                <div className="card-content">
+                  <h2 className="card-title">{p.name}</h2>
+                  <p className="card-brand">{p.brand}</p>
+                  <div className="card-details">
+                    <span className="card-tag">{p.concentration}</span>
+                    <span className="card-tag">{p.genre}</span>
+                    <span className="card-tag">{p.volumeMl}ml</span>
+                  </div>
+                  <p className="card-price">${p.price}</p>
+                  {
+                    user && (
+                      <div className="card-actions">
+                        <button onClick={() => handleUpdatePerfume(p)} className="btn btn-primary">Actualizar</button>
+                        <button onClick={() => deletePerfume(p._id)} className="btn btn-danger">Eliminar</button>
+                      </div>
+                    )
+                  }
+                </div>
+              </div>
+            ))
+          }
+        </section>
+      </div>
     </Layout>
   );
 };

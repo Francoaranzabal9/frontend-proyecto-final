@@ -1,0 +1,373 @@
+:root {
+  --primary-color: #c9a227;
+  --primary-hover: #b08d1f;
+  --accent-color: #000000;
+  --text-color: #333;
+  --bg-color: #fcfbf8;
+  --card-bg: #ffffff;
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: all 0.3s ease;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.header {
+  background-color: var(--primary-color);
+  padding: 0.75rem 0;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.btn-logout {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+}
+
+.btn-logout:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+.footer {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1.5rem 0;
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.footer-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.page-banner {
+  text-align: center;
+  font-size: 2rem;
+  margin: 1.5rem 0;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.page-banner::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  margin: 0.4rem auto 0;
+}
+
+.page-section {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  padding: 0 1rem;
+}
+
+.main-content {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+  align-items: flex-start;
+}
+
+.filters-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.filters-form {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--primary-color);
+  position: sticky;
+  top: 80px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.filters-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filter-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.perfumes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  flex-grow: 1;
+  padding: 0 1rem;
+}
+
+.perfume-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+}
+
+.perfume-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.card-image-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: #f0f0f0;
+}
+
+.perfume-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.perfume-card:hover .perfume-image {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem;
+  color: var(--primary-color);
+}
+
+.card-brand {
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.card-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-tag {
+  background: #f0f2f5;
+  padding: 0.2rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.card-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-top: auto;
+  margin-bottom: 0.75rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.card-actions .btn {
+  flex: 1;
+  padding: 0.4rem;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .filters-sidebar {
+    width: 100%;
+  }
+
+  .filters-form {
+    position: static;
+  }
+}

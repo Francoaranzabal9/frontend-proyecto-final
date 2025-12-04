@@ -358,6 +358,36 @@ h3 {
   font-size: 0.75rem;
 }
 
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--primary-color);
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.auth-input {
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  outline: none;
+}
+
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;

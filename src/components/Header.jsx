@@ -20,15 +20,18 @@ const Header = () => {
   return (
     <header className="header">
       <div className="nav-container">
-        <Link to="/" onClick={closeMenu}>
-          <img src="/sellodorado.webp" alt="logo de la tienda" className="logo" />
-        </Link>
-
-        <div className="mobile-menu-icon" onClick={toggleMenu}>
-          {isMenuOpen ? <FaTimes /> : <FaBars />}
+        {/* Logo - Left */}
+        <div>
+          <Link to="/" onClick={closeMenu}>
+            <img src="/sellodorado.webp" alt="logo de la tienda" className="logo" />
+          </Link>
         </div>
 
+        {/* Nav Menu - Center */}
         <nav className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+          <div className="mobile-menu-close" onClick={closeMenu}>
+            <FaTimes />
+          </div>
           <Link to="/" className="nav-link" onClick={closeMenu}>Productos</Link>
           <Link to="/sobre-nosotros" className="nav-link" onClick={closeMenu}>Nosotros</Link>
           {
@@ -41,19 +44,27 @@ const Header = () => {
               <>
                 <Link to="/agregar-producto" className="nav-link" onClick={closeMenu}>Agregar Producto</Link>
                 <Link to="/contacto" className="nav-link" onClick={closeMenu}>Contacto</Link>
-                <Link to="/carrito" className="nav-link cart-link" onClick={closeMenu}>
-                  <FaShoppingCart />
-                  {getCartCount() > 0 && (
-                    <span className="cart-badge">
-                      {getCartCount()}
-                    </span>
-                  )}
-                </Link>
                 <button onClick={() => { logout(); closeMenu(); }} className="btn-logout">Cerrar sesión</button>
               </>
             )
           }
         </nav>
+
+        {/* Right Side: Cart & Mobile Menu */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <Link to="/carrito" className="nav-link cart-link" onClick={closeMenu}>
+            <FaShoppingCart />
+            {getCartCount() > 0 && (
+              <span className="cart-badge">
+                {getCartCount()}
+              </span>
+            )}
+          </Link>
+
+          <div className="mobile-menu-icon" onClick={toggleMenu}>
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
+          </div>
+        </div>
       </div>
     </header>
   );

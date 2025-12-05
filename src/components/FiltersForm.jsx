@@ -1,8 +1,21 @@
+import { useState } from 'react';
+import { FaFilter, FaChevronUp, FaChevronDown } from 'react-icons/fa';
 
 export const Filters = ({ filters, handleChange, handleSubmit, handleResetFilters }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <aside className="filters-sidebar">
-      <div className="filters-form">
+      <button
+        className="mobile-filter-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+      >
+        <span className="toggle-text"><FaFilter /> Filtros</span>
+        {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+      </button>
+
+      <div className={`filters-form ${isOpen ? 'mobile-visible' : ''}`}>
         <form onSubmit={handleSubmit} className="search-form">
           <div className="filters-grid">
             <input

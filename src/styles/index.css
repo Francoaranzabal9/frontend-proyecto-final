@@ -376,16 +376,23 @@ h3 {
   box-shadow: var(--shadow);
   border-top: 4px solid var(--primary-color);
   max-width: 400px;
-  box-shadow: var(--shadow);
 }
 
 .auth-input {
   padding: 0.5rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--primary-color);
   border-radius: 6px;
   font-size: 0.9rem;
   transition: var(--transition);
   outline: none;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 @media (max-width: 768px) {

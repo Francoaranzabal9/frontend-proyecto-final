@@ -19,7 +19,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link to="/agregar-producto" className="nav-link">Agregar</Link>
+                <Link to="/agregar-producto" className="nav-link">Agregar Producto</Link>
                 <Link to="/contacto" className="nav-link">Contacto</Link>
                 <button onClick={logout} className="btn-logout">Cerrar sesión</button>
               </>

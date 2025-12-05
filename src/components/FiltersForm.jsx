@@ -21,30 +21,32 @@ export const Filters = ({ filters, handleChange, handleSubmit, handleResetFilter
               value={filters.brand}
               onChange={handleChange}
             />
-            <input
+            <select
               className="filter-input"
-              type="text"
               placeholder="Concentración"
               name="concentration"
               value={filters.concentration}
               onChange={handleChange}
-            />
-            <input
+            >
+              <option value="">Concentración</option>
+              <option value="EDP">EDP</option>
+              <option value="EDT">EDT</option>
+              <option value="Parfum">Parfum</option>
+              <option value="EDC">EDC</option>
+              <option value="Extrait">Extrait</option>
+            </select>
+            <select
               className="filter-input"
-              type="text"
               placeholder="Género"
               name="genre"
               value={filters.genre}
               onChange={handleChange}
-            />
-            <input
-              className="filter-input"
-              type="text"
-              placeholder="Volumen (ml)"
-              name="volumeMl"
-              value={filters.volumeMl}
-              onChange={handleChange}
-            />
+            >
+              <option value="">Género</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Unisex">Unisex</option>
+            </select>
             <input
               className="filter-input"
               type="text"
@@ -59,14 +61,6 @@ export const Filters = ({ filters, handleChange, handleSubmit, handleResetFilter
               placeholder="Precio maximo"
               name="maxPrice"
               value={filters.maxPrice}
-              onChange={handleChange}
-            />
-            <input
-              className="filter-input"
-              type="text"
-              placeholder="Descripción"
-              name="description"
-              value={filters.description}
               onChange={handleChange}
             />
           </div>

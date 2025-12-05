@@ -35,7 +35,7 @@ export const UpdatePerfume = ({ perfume, onClose, onUpdate }) => {
 
     try {
       setLoader(true)
-      const response = await fetch(`http://localhost:2222/perfumes/${perfume._id}`, {
+      const response = await fetch(`https://api-sello-dorado.onrender.com/perfumes/${perfume._id}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,

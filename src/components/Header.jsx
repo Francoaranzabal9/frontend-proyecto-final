@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="nav-container">
-        <Link to="/" className="logo">El sello dorado</Link>
+        <Link to="/" ><img src="sellodorado.webp" alt="logo de la tienda" className="logo" /></Link>
         <nav className="nav-menu">
           <Link to="/" className="nav-link">Productos</Link>
           <Link to="/sobre-nosotros" className="nav-link">Nosotros</Link>

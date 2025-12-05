@@ -46,7 +46,7 @@ const AddProduct = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:2222/perfumes", {
+      const response = await fetch("https://api-sello-dorado.onrender.com/perfumes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

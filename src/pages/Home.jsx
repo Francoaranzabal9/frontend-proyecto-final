@@ -47,7 +47,7 @@ const Home = () => {
       }
     })
     try {
-      const response = await fetch(`http://localhost:2222/perfumes?${query}`)
+      const response = await fetch(`https://api-sello-dorado.onrender.com/perfumes?${query}`)
       const dataPerfumes = await response.json()
       setPerfumes(dataPerfumes.data.reverse())
     } catch (error) {
@@ -87,7 +87,7 @@ const Home = () => {
     if (!confirm("Estas seguro de eliminar este perfume?")) return
 
     try {
-      const response = await fetch(`http://localhost:2222/perfumes/${idPerfume}`, {
+      const response = await fetch(`https://api-sello-dorado.onrender.com/perfumes/${idPerfume}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`

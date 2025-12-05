@@ -46,7 +46,7 @@ const Contact = () => {
       <div className="contact-container">
         <h1>Contacto</h1>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="contact-form" onSubmit={handleSubmit}>
           <label>Correo electrónico</label>
           <input
             type="email"

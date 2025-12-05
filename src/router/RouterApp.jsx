@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import Contact from "../pages/Contact";
+import Cart from "../pages/Cart";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { GetPerfume } from "../pages/GetPerfume";
 
@@ -24,6 +25,7 @@ const RouterApp = () => {
         />
         <Route path="/get-perfume/:id" element={<GetPerfume />} />
         <Route path="/contacto" element={<Contact />} />
+        <Route path="/carrito" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   )

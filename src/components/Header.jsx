@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const { getCartCount } = useCart();
 
   return (
     <header className="header">
@@ -21,10 +24,19 @@ const Header = () => {
               <>
                 <Link to="/agregar-producto" className="nav-link">Agregar Producto</Link>
                 <Link to="/contacto" className="nav-link">Contacto</Link>
+                <Link to="/carrito" className="nav-link cart-link">
+                  <FaShoppingCart />
+                  {getCartCount() > 0 && (
+                    <span className="cart-badge">
+                      {getCartCount()}
+                    </span>
+                  )}
+                </Link>
                 <button onClick={logout} className="btn-logout">Cerrar sesión</button>
               </>
             )
           }
+
         </nav>
       </div>
     </header>

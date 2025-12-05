@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 import { UpdatePerfume } from "../components/UpdatePerfume";
 import ToastMessage from "../components/ToastMessage";
 
@@ -13,6 +14,7 @@ export const GetPerfume = () => {
   const [selectedPerfume, setSelectedPerfume] = useState(null);
 
   const { user, token } = useAuth();
+  const { addToCart } = useCart();
 
   const [serverResponse, setServerResponse] = useState({
     success: null,
@@ -137,7 +139,7 @@ export const GetPerfume = () => {
 
           <div className="detail-description">
             <h3>Descripción</h3>
-            <p>{perfume.description}</p>
+            <p>⚜️ {perfume.description} ⚜️</p>
           </div>
 
           <div className="detail-stock">
@@ -146,7 +148,28 @@ export const GetPerfume = () => {
             </span>
           </div>
 
-          <button className="btn btn-primary btn-add-cart" disabled={!perfume.stock}>
+          <button
+            className="btn btn-primary btn-add-cart"
+            disabled={!perfume.stock}
+            onClick={() => {
+              if (!user) {
+                navigate("/login");
+                return;
+              }
+              addToCart({
+                id: perfume._id,
+                name: perfume.name,
+                price: perfume.price,
+                image: perfume.image,
+                brand: perfume.brand
+              });
+              setServerResponse({
+                success: true,
+                notification: "Producto agregado al carrito",
+                error: { ...serverResponse.error }
+              });
+            }}
+          >
             {perfume.stock ? 'Agregar al Carrito' : 'Sin Stock'}
           </button>
 

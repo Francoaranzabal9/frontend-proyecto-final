@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { Filters } from "../components/FiltersForm";
+import { UpdateProduct } from "../components/UpdatePerfume";
 
 const Home = () => {
 
@@ -151,6 +152,16 @@ const Home = () => {
       <div className="main-content">
 
         <Filters filters={filters} handleChange={handleChange} handleSubmit={handleSubmit} handleResetFilters={handleResetFilters} />
+
+        {
+          selectedPerfume && (
+            <UpdateProduct
+              perfume={selectedPerfume}
+              onClose={() => setSelectedPerfume(null)}
+              onUpdate={() => fetchPerfumes()}
+            />
+          )
+        }
 
         <section className="perfumes-grid">
           {

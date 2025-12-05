@@ -1,25 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
-import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
+import { useAuth } from "../context/AuthContext"
+import { useState } from "react"
 
-const AddProduct = () => {
-
+export const UpdateProduct = ({ perfume, onClose, onUpdate }) => {
+  const [loader, setLoader] = useState(null)
   const [formData, setFormData] = useState({
-    name: "",
-    brand: "",
-    genre: "",
-    concentration: "",
-    stock: "",
-    volumeMl: "",
-    price: "",
-    description: "",
-    image: null,
+    name: perfume.name,
+    brand: perfume.brand,
+    genre: perfume.genre,
+    concentration: perfume.concentration,
+    stock: perfume.stock,
+    volumeMl: perfume.volumeMl,
+    price: perfume.price,
+    description: perfume.description,
+    image: perfume.image,
   })
-
   const { token } = useAuth()
-
-  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -34,44 +29,27 @@ const AddProduct = () => {
     dataToSend.append("price", formData.price);
     dataToSend.append("description", formData.description);
 
-    if (formData.image) {
-      dataToSend.append("image", formData.image);
+    if (formData.image instanceof File) {
+      dataToSend.append("image", formData.image, formData.image.name);
     }
 
     try {
-      const response = await fetch("http://localhost:2222/perfumes", {
-        method: "POST",
+      const response = await fetch(`http://localhost:2222/perfumes/${perfume._id}`, {
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: dataToSend,
       })
-
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error("Error del servidor:", errorData);
-        alert(errorData.error || "Error al agregar el producto");
-        return
+        console.error("Error al actualizar el producto")
       }
-
-      alert("Producto agregado correctamente")
-
-      setFormData({
-        name: "",
-        brand: "",
-        genre: "",
-        concentration: "",
-        stock: "",
-        volumeMl: "",
-        price: "",
-        description: "",
-        image: null,
-      })
-      navigate("/")
-
+      onClose()
+      onUpdate()
     } catch (error) {
-      console.error(error)
-      alert("Error de conexión al agregar el producto")
+      console.log("Error al actualizar el producto")
+    } finally {
+      setLoader(null)
     }
   }
 
@@ -84,33 +62,26 @@ const AddProduct = () => {
   }
 
   return (
-
-    <Layout>
-      <div className="add-product-container">
-        <h1>Agregar Producto</h1>
-        <form className="add-product-form" onSubmit={handleSubmit}>
+    <section className="modal-overlay">
+      <div className="modal">
+        <h2>Actualizar Producto</h2>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
-            placeholder="Nombre"
             value={formData.name}
             onChange={handleChange}
-            className="auth-input"
           />
           <input
             type="text"
             name="brand"
-            placeholder="Marca"
             value={formData.brand}
             onChange={handleChange}
-            className="auth-input"
           />
           <select
-            placeholder="Género"
             name="genre"
             value={formData.genre}
             onChange={handleChange}
-            className="auth-input"
           >
             <option value="">Género</option>
             <option value="Masculino">Masculino</option>
@@ -118,11 +89,9 @@ const AddProduct = () => {
             <option value="Unisex">Unisex</option>
           </select>
           <select
-            placeholder="Concentración"
             name="concentration"
             value={formData.concentration}
             onChange={handleChange}
-            className="auth-input"
           >
             <option value="">Concentración</option>
             <option value="EDP">EDP</option>
@@ -132,12 +101,9 @@ const AddProduct = () => {
             <option value="Extrait">Extrait</option>
           </select>
           <select
-            type="text"
             name="stock"
-            placeholder="Stock"
             value={formData.stock}
             onChange={handleChange}
-            className="auth-input"
           >
             <option value="">Stock</option>
             <option value="true">Disponible</option>
@@ -146,39 +112,31 @@ const AddProduct = () => {
           <input
             type="text"
             name="volumeMl"
-            placeholder="Volumen en ml"
             value={formData.volumeMl}
             onChange={handleChange}
-            className="auth-input"
           />
           <input
             type="text"
             name="price"
-            placeholder="Precio"
             value={formData.price}
             onChange={handleChange}
-            className="auth-input"
           />
           <textarea
-            type="text"
             name="description"
-            placeholder="Descripcion"
             value={formData.description}
-            onChange={handleChange}
-            className="auth-input"
-          />
+            onChange={handleChange}>
+
+          </textarea>
           <input
             type="file"
             name="image"
             accept=".jpg, .jpeg, .png"
             onChange={handleChange}
-            className="auth-input"
           />
-          <button className="btn btn-primary" type="submit">Agregar Producto</button>
+          <button className="btn btn-primary" type="submit">Actualizar</button>
+          <button className="btn btn-secondary" onClick={onClose}>Cancelar</button>
         </form>
       </div>
-    </Layout>
-  );
-};
-
-export default AddProduct;
+    </section>
+  )
+}

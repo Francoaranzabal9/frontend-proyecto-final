@@ -328,7 +328,6 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-bottom: 0.75rem;
 }
 
 .card-tag {
@@ -344,7 +343,15 @@ h3 {
   font-weight: 700;
   color: var(--primary-color);
   margin-top: auto;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.60rem;
+}
+
+.out-of-stock {
+  color: #e74c3c;
+  background: #f0f2f5;
+  padding: 0.2rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
 }
 
 .card-actions {

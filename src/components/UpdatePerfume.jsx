@@ -34,6 +34,7 @@ export const UpdateProduct = ({ perfume, onClose, onUpdate }) => {
     }
 
     try {
+      setLoader(true)
       const response = await fetch(`http://localhost:2222/perfumes/${perfume._id}`, {
         method: "PATCH",
         headers: {
@@ -133,7 +134,7 @@ export const UpdateProduct = ({ perfume, onClose, onUpdate }) => {
             accept=".jpg, .jpeg, .png"
             onChange={handleChange}
           />
-          <button className="btn btn-primary" type="submit">Actualizar</button>
+          <button className="btn btn-primary" type="submit">{loader ? "Actualizando..." : "Actualizar"}</button>
           <button className="btn btn-secondary" onClick={onClose}>Cancelar</button>
         </form>
       </div>

@@ -139,6 +139,9 @@ const Home = () => {
     fetchPerfumes()
   }
 
+  const inStockPerfumes = perfumes.filter((p) => p.stock === true);
+  const outOfStockPerfumes = perfumes.filter((p) => p.stock === false);
+
   return (
     <Layout>
       <h1 className="page-banner">Nuestros productos</h1>
@@ -164,9 +167,9 @@ const Home = () => {
         }
 
         <section className="perfumes-grid">
-          {
-            perfumes.map((p) => (
-              <div key={p._id} className="perfume-card">
+          {perfumes.length > 0 ? (
+            <>
+              {inStockPerfumes.map((p, i) => (<div key={p._id} className="perfume-card">
                 <div className="card-image-container">
                   <img src={p.image} alt={`Imagen de ${p.name}`} className="perfume-image" />
                 </div>
@@ -188,9 +191,37 @@ const Home = () => {
                     )
                   }
                 </div>
-              </div>
-            ))
-          }
+              </div>))}
+              {user && outOfStockPerfumes.map((p, i) => (<div key={p._id} className="perfume-card">
+                <div className="card-image-container">
+                  <img src={p.image} alt={`Imagen de ${p.name}`} className="perfume-image" />
+                </div>
+                <div className="card-content">
+                  <h2 className="card-title">{p.name}</h2>
+                  <p className="card-brand">{p.brand}</p>
+                  <div className="card-details">
+                    <span className="card-tag">{p.concentration}</span>
+                    <span className="card-tag">{p.genre}</span>
+                    <span className="card-tag">{p.volumeMl}ml</span>
+                  </div>
+                  <div className="card-details">
+                    <p className="card-price">${p.price}</p>
+                    <p className="out-of-stock">Agotado</p>
+                  </div>
+                  {
+                    user && (
+                      <div className="card-actions">
+                        <button onClick={() => handleUpdatePerfume(p)} className="btn btn-primary">Actualizar</button>
+                        <button onClick={() => deletePerfume(p._id)} className="btn btn-danger">Eliminar</button>
+                      </div>
+                    )
+                  }
+                </div>
+              </div>))}
+            </>
+          ) : (
+            <p>No hay perfumes disponibles</p>
+          )}
         </section>
       </div>
     </Layout>

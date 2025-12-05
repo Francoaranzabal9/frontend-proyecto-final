@@ -157,7 +157,7 @@ const Home = () => {
             perfumes.map((p) => (
               <div key={p._id} className="perfume-card">
                 <div className="card-image-container">
-                  <img src={`http://localhost:2222/perfumes/${p.image}`} alt={`Imagen de ${p.name}`} className="perfume-image" />
+                  <img src={p.image} alt={`Imagen de ${p.name}`} className="perfume-image" />
                 </div>
                 <div className="card-content">
                   <h2 className="card-title">{p.name}</h2>

@@ -18,7 +18,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   overflow-x: hidden;
   /* Prevent horizontal scroll */
 }
@@ -133,6 +133,7 @@ h3 {
   transition: var(--transition);
 }
 
+
 .footer-link:hover {
   color: #fff;
   text-decoration: underline;
@@ -141,7 +142,7 @@ h3 {
 /* Page Layout */
 .page-banner {
   text-align: center;
-  font-size: 2rem;
+  font-size: 3rem;
   margin: 1.5rem 0;
   color: var(--primary-color);
   text-transform: uppercase;
@@ -279,7 +280,7 @@ h3 {
 /* Perfumes Grid */
 .perfumes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   flex-grow: 1;
   padding: 0 1rem;
@@ -303,7 +304,7 @@ h3 {
 }
 
 .card-image-container {
-  height: 200px;
+  height: 280px;
   overflow: hidden;
   position: relative;
   background: #f0f0f0;
@@ -328,7 +329,7 @@ h3 {
 }
 
 .card-title {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   margin: 0 0 0.4rem;
   color: var(--primary-color);
 }
@@ -356,7 +357,7 @@ h3 {
 }
 
 .card-price {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary-color);
   margin-top: auto;
@@ -378,8 +379,9 @@ h3 {
 
 .card-actions .btn {
   flex: 1;
-  padding: 0.4rem;
-  font-size: 0.75rem;
+  padding: 0.3rem 0.1rem;
+  font-size: 0.7rem;
+  min-width: 0;
 }
 
 /* Auth Forms */
@@ -749,6 +751,7 @@ h3 {
   font-size: 0.9rem;
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1014,29 +1017,39 @@ h3 {
 
 @media (max-width: 768px) {
 
-  /* Header & Nav */
+  /* Header & Nav - Popup Style */
   .mobile-menu-icon {
     display: block;
   }
 
   .nav-menu {
     position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 90%;
+    max-width: 350px;
+    height: auto;
     background: var(--card-bg);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.3s ease-in-out;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
     padding: 2rem;
+    border-radius: 12px;
+    border-top: 4px solid var(--primary-color);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
   }
 
   .nav-menu.active {
-    right: 0;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translate(-50%, -50%);
   }
 
   .nav-link {
@@ -1048,6 +1061,7 @@ h3 {
   .main-content {
     flex-direction: column;
     padding: 0 1rem;
+    align-items: center;
   }
 
   .filters-sidebar {
@@ -1093,9 +1107,11 @@ h3 {
 
   /* Grid */
   .perfumes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
     padding: 0;
+    justify-content: center;
+    width: 100%;
   }
 
   .card-image-container {
@@ -1142,7 +1158,7 @@ h3 {
 
 @media (max-width: 550px) {
   .perfumes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
   .card-image-container {

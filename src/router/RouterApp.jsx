@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import AddProduct from "../pages/AddProduct";
 import Contact from "../pages/Contact";
 import { PrivateRoute } from "../components/PrivateRoute";
+import { GetPerfume } from "../pages/GetPerfume";
 
 const RouterApp = () => {
   return (
@@ -21,6 +22,7 @@ const RouterApp = () => {
           </PrivateRoute>
         }
         />
+        <Route path="/get-perfume/:id" element={<GetPerfume />} />
         <Route path="/contacto" element={<Contact />} />
       </Routes>
     </BrowserRouter>

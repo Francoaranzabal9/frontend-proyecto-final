@@ -1,7 +1,7 @@
 import { useAuth } from "../context/AuthContext"
 import { useState } from "react"
 
-export const UpdateProduct = ({ perfume, onClose, onUpdate }) => {
+export const UpdatePerfume = ({ perfume, onClose, onUpdate }) => {
   const [loader, setLoader] = useState(null)
   const [formData, setFormData] = useState({
     name: perfume.name,

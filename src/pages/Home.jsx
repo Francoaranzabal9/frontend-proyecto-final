@@ -3,10 +3,13 @@ import { useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { Filters } from "../components/FiltersForm";
-import { UpdateProduct } from "../components/UpdatePerfume";
+import { UpdatePerfume } from "../components/UpdatePerfume";
 import ToastMessage from "../components/ToastMessage";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate = useNavigate()
 
   const [perfumes, setPerfumes] = useState([])
   const [selectedPerfume, setSelectedPerfume] = useState(null)
@@ -46,7 +49,6 @@ const Home = () => {
       const response = await fetch(`http://localhost:2222/perfumes?${query}`)
       const dataPerfumes = await response.json()
       setPerfumes(dataPerfumes.data.reverse())
-      console.log(user)
     } catch (error) {
       setServerResponse({
         ...serverResponse,
@@ -184,7 +186,7 @@ const Home = () => {
 
         {
           selectedPerfume && (
-            <UpdateProduct
+            <UpdatePerfume
               perfume={selectedPerfume}
               onClose={() => setSelectedPerfume(null)}
               onUpdate={(success, msg) => {
@@ -203,7 +205,7 @@ const Home = () => {
           {perfumes.length > 0 ? (
             <>
               {inStockPerfumes.map((p, i) => (<div key={p._id} className="perfume-card">
-                <div className="card-image-container">
+                <div className="card-image-container" onClick={() => navigate(`/get-perfume/${p._id}`)}>
                   <img src={p.image} alt={`Imagen de ${p.name}`} className="perfume-image" />
                 </div>
                 <div className="card-content">

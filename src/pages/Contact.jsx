@@ -27,7 +27,7 @@ const Contact = () => {
       })
       const dataResponse = await response.json()
 
-      console.log(dataResponse)
+
 
       setForm({
         subject: "",

@@ -7,15 +7,18 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
+  // Inicializa el carrito desde localStorage para persistencia
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
+  // Guarda el carrito en localStorage cada vez que cambia
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Agrega un producto al carrito o incrementa su cantidad si ya existe
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);

@@ -36,7 +36,7 @@ const Login = () => {
         alert(responseData.error)
       }
 
-      console.log(responseData)
+
 
       login(responseData.data.token)
 

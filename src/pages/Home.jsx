@@ -37,6 +37,7 @@ const Home = () => {
   const { user, token } = useAuth()
   const location = useLocation()
 
+  // Función para obtener los perfumes, acepta una query string para filtros
   const fetchPerfumes = async (query = "") => {
     setServerResponse({
       ...serverResponse,
@@ -134,6 +135,7 @@ const Home = () => {
     })
   }
 
+  // Maneja el envío del formulario de filtros y construye la query string
   const handleSubmit = (e) => {
     e.preventDefault()
     const query = new URLSearchParams()

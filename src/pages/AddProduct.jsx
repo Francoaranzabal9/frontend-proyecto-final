@@ -27,6 +27,7 @@ const AddProduct = () => {
 
   const navigate = useNavigate()
 
+  // Maneja el envío del formulario utilizando FormData para soportar la subida de imágenes
   const handleSubmit = async (e) => {
     e.preventDefault()
 

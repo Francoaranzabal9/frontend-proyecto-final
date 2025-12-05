@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { Filters } from "../components/FiltersForm";
 import { UpdateProduct } from "../components/UpdatePerfume";
+import ToastMessage from "../components/ToastMessage";
 
 const Home = () => {
 
@@ -30,11 +32,13 @@ const Home = () => {
   })
 
   const { user, token } = useAuth()
+  const location = useLocation()
 
   const fetchPerfumes = async (query = "") => {
     setServerResponse({
       ...serverResponse,
       error: {
+        ...serverResponse.error,
         fetch: null,
       }
     })
@@ -45,21 +49,34 @@ const Home = () => {
       console.log(user)
     } catch (error) {
       setServerResponse({
+        ...serverResponse,
         success: false,
         notification: "Error al obtener los perfumes",
-        ...serverResponse.error, fetch: false
+        error: {
+          ...serverResponse.error,
+          fetch: false
+        }
       })
     }
   }
 
   useEffect(() => {
     fetchPerfumes()
+    if (location.state?.notification) {
+      setServerResponse({
+        success: location.state.success,
+        notification: location.state.notification,
+        error: { ...serverResponse.error }
+      })
+      window.history.replaceState({}, document.title)
+    }
   }, [])
 
   const deletePerfume = async (idPerfume) => {
     setServerResponse({
       ...serverResponse,
       error: {
+        ...serverResponse.error,
         delete: null,
       }
     })
@@ -76,21 +93,30 @@ const Home = () => {
       const dataResponse = await response.json()
 
       if (dataResponse.error) {
-        alert(dataResponse.error)
+        setServerResponse({
+          ...serverResponse,
+          success: false,
+          notification: dataResponse.error,
+        })
+        return
       }
 
       setPerfumes(perfumes.filter((p => p._id !== idPerfume)))
 
       setServerResponse({
+        ...serverResponse,
         success: true,
         notification: "Perfume eliminado correctamente",
-        ...serverResponse.error
       })
     } catch (error) {
       setServerResponse({
+        ...serverResponse,
         success: false,
         notification: "Error al eliminar el perfume",
-        ...serverResponse.error, delete: false
+        error: {
+          ...serverResponse.error,
+          delete: false
+        }
       })
     }
   }
@@ -161,7 +187,14 @@ const Home = () => {
             <UpdateProduct
               perfume={selectedPerfume}
               onClose={() => setSelectedPerfume(null)}
-              onUpdate={() => fetchPerfumes()}
+              onUpdate={(success, msg) => {
+                if (success) fetchPerfumes()
+                if (msg) setServerResponse({
+                  success,
+                  notification: msg,
+                  error: { ...serverResponse.error }
+                })
+              }}
             />
           )
         }
@@ -224,6 +257,13 @@ const Home = () => {
           )}
         </section>
       </div>
+      {serverResponse.notification && (
+        <ToastMessage
+          message={serverResponse.notification}
+          type={serverResponse.success ? "green" : "red"}
+          onClose={() => setServerResponse({ ...serverResponse, notification: null })}
+        />
+      )}
     </Layout>
   );
 };

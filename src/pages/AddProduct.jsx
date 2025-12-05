@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import ToastMessage from "../components/ToastMessage";
 
 const AddProduct = () => {
 
@@ -15,6 +16,11 @@ const AddProduct = () => {
     price: "",
     description: "",
     image: null,
+  })
+
+  const [serverResponse, setServerResponse] = useState({
+    success: null,
+    notification: null,
   })
 
   const { token } = useAuth()
@@ -50,11 +56,12 @@ const AddProduct = () => {
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         console.error("Error del servidor:", errorData);
-        alert(errorData.error || "Error al agregar el producto");
+        setServerResponse({
+          success: false,
+          notification: errorData.error || "Error al agregar el producto"
+        })
         return
       }
-
-      alert("Producto agregado correctamente")
 
       setFormData({
         name: "",
@@ -67,11 +74,14 @@ const AddProduct = () => {
         description: "",
         image: null,
       })
-      navigate("/")
+      navigate("/", { state: { notification: "Producto agregado correctamente", success: true } })
 
     } catch (error) {
       console.error(error)
-      alert("Error de conexión al agregar el producto")
+      setServerResponse({
+        success: false,
+        notification: "Error de conexión al agregar el producto"
+      })
     }
   }
 
@@ -84,7 +94,6 @@ const AddProduct = () => {
   }
 
   return (
-
     <Layout>
       <div className="add-product-container">
         <h1>Agregar Producto</h1>
@@ -177,6 +186,13 @@ const AddProduct = () => {
           <button className="btn btn-primary" type="submit">Agregar Producto</button>
         </form>
       </div>
+      {serverResponse.notification && (
+        <ToastMessage
+          message={serverResponse.notification}
+          type={serverResponse.success ? "green" : "red"}
+          onClose={() => setServerResponse({ ...serverResponse, notification: null })}
+        />
+      )}
     </Layout>
   );
 };

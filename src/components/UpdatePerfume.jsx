@@ -43,12 +43,13 @@ export const UpdateProduct = ({ perfume, onClose, onUpdate }) => {
         body: dataToSend,
       })
       if (!response.ok) {
-        console.error("Error al actualizar el producto")
+        onUpdate(false, "Error al actualizar el producto")
+      } else {
+        onUpdate(true, "Producto actualizado correctamente")
+        onClose()
       }
-      onClose()
-      onUpdate()
     } catch (error) {
-      console.log("Error al actualizar el producto")
+      onUpdate(false, "Error al actualizar el producto")
     } finally {
       setLoader(null)
     }

@@ -33,6 +33,7 @@ const Register = () => {
 
       if (responseData.error) {
         alert(responseData.error)
+        return
       }
 
       alert("Usuario registrado exitosamente")

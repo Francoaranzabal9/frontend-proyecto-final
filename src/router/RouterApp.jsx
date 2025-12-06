@@ -8,6 +8,7 @@ import Contact from "../pages/Contact";
 import Cart from "../pages/Cart";
 import { PrivateRoute } from "../components/PrivateRoute";
 import { GetPerfume } from "../pages/GetPerfume";
+import NotFound from "../pages/NotFound";
 
 const RouterApp = () => {
   return (
@@ -26,6 +27,7 @@ const RouterApp = () => {
         <Route path="/get-perfume/:id" element={<GetPerfume />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/carrito" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

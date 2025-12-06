@@ -485,7 +485,7 @@ h3 {
   margin: 0 auto 4rem;
   padding: 0 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
 }
 
@@ -1061,6 +1061,7 @@ h3 {
   /* Header & Nav - Popup Style */
   .mobile-menu-icon {
     display: block;
+    font-size: 1rem;
   }
 
   .nav-menu {
@@ -1093,9 +1094,22 @@ h3 {
     transform: translate(-50%, -50%);
   }
 
+  .header {
+    padding: 0;
+  }
+
+  .logo {
+    width: 30px
+  }
+
   .nav-link {
-    font-size: 1.9rem;
+    font-size: 1rem;
     margin: 1rem 0;
+  }
+
+  .cart-link {
+    font-size: 1rem;
+    margin: 0.5rem;
   }
 
   .mobile-menu-close {
@@ -1179,6 +1193,30 @@ h3 {
     width: 100%;
   }
 
+  .about-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
+  .add-product-form .auth-input {
+    font-size: 1rem;
+  }
+
+  .modal-overlay {
+    padding: 0;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+  }
+
+  .modal input,
+  .modal select,
+  .modal textarea {
+    font-size: 0.8rem;
+  }
+
   .card-image-container {
     height: 180px;
   }
@@ -1222,6 +1260,58 @@ h3 {
 }
 
 @media (max-width: 550px) {
+
+  .filter-input {
+    font-size: 0.8rem;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    font-size: 0.5rem;
+    padding: 5px;
+    width: 100%;
+
+  }
+
+  .page-banner {
+    font-size: 1.5rem;
+  }
+
+  .nav-menu {
+    padding: 5px;
+  }
+
+  .nav-menu .mobile-menu-icon {
+    font-size: 1.3rem;
+  }
+
+  .nav-menu .mobile-menu-close {
+    font-size: 1.3rem;
+  }
+
+  .nav-menu .nav-link {
+    font-size: 0.7rem;
+  }
+
+  .perfume-detail-info .card-actions {
+    flex-direction: row;
+    padding: 10px;
+    width: fit-content;
+  }
+
+  .perfume-detail-info .card-actions .btn {
+    width: 100%;
+  }
+
+  .about-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
   .perfumes-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
@@ -1243,4 +1333,78 @@ h3 {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Not Found Page */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.logo-large {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.not-found-container h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.not-found-container p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.not-found-container .btn {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .logo-large {
+    width: 100px;
+  }
+
+  .not-found-container h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Session Expired Modal */
+.main-layout {
+  min-height: 90vh;
+}
+
+.session-expired-overlay {
+  z-index: 9999;
+}
+
+.session-expired-modal {
+  text-align: center;
+  padding: 2rem;
+}
+
+.session-expired-title {
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.session-expired-message {
+  margin-bottom: 2rem;
+}
+
+.session-expired-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }

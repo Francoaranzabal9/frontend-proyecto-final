@@ -75,7 +75,7 @@ const Register = () => {
       console.log(error)
       setServerResponse({
         success: false,
-        notification: responseData.error || "Error de conexión"
+        notification: "Error de conexión"
       })
     }
   }

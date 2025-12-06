@@ -37,12 +37,12 @@ const AddProduct = () => {
     dataToSend.append("genre", formData.genre);
     dataToSend.append("concentration", formData.concentration);
     dataToSend.append("stock", formData.stock);
-    dataToSend.append("volumeMl", formData.volumeMl);
-    dataToSend.append("price", formData.price);
+    dataToSend.append("volumeMl", Number(formData.volumeMl));
+    dataToSend.append("price", Number(formData.price));
     dataToSend.append("description", formData.description);
 
     if (formData.image) {
-      dataToSend.append("image", formData.image);
+      dataToSend.append("image", formData.image || "");
     }
 
     try {
@@ -56,7 +56,6 @@ const AddProduct = () => {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        console.error("Error del servidor:", errorData);
         setServerResponse({
           success: false,
           notification: errorData.error || "Error al agregar el producto"

@@ -1,5 +1,6 @@
 import { useAuth } from "../context/AuthContext"
 import { useState } from "react"
+import ToastMessage from "./ToastMessage"
 
 export const UpdatePerfume = ({ perfume, onClose, onUpdate }) => {
   const [loader, setLoader] = useState(null)
@@ -14,6 +15,12 @@ export const UpdatePerfume = ({ perfume, onClose, onUpdate }) => {
     description: perfume.description,
     image: perfume.image,
   })
+
+  const [serverResponse, setServerResponse] = useState({
+    success: null,
+    notification: null,
+  })
+
   const { token } = useAuth()
 
   const handleSubmit = async (e) => {
@@ -35,21 +42,37 @@ export const UpdatePerfume = ({ perfume, onClose, onUpdate }) => {
 
     try {
       setLoader(true)
-      const response = await fetch(`http://localhost:2222/perfumes/${perfume._id}`, {
+      const response = await fetch(`https://api-sello-dorado.onrender.com/perfumes/${perfume._id}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: dataToSend,
       })
+      const data = await response.json()
+      console.log(data)
       if (!response.ok) {
-        onUpdate(false, "Error al actualizar el producto")
+        setServerResponse({
+          success: false,
+          notification: data.error || "Error al actualizar el producto"
+        })
+        onUpdate(false, data.error || "Error al actualizar el producto")
       } else {
+        setServerResponse({
+          success: true,
+          notification: "Producto actualizado correctamente"
+        })
         onUpdate(true, "Producto actualizado correctamente")
-        onClose()
+        setTimeout(() => {
+          onClose()
+        }, 500)
       }
     } catch (error) {
-      onUpdate(false, "Error al actualizar el producto")
+      setServerResponse({
+        success: false,
+        notification: data.error || "Error al actualizar el producto"
+      })
+      onUpdate(false, data.error || "Error al actualizar el producto")
     } finally {
       setLoader(null)
     }
@@ -139,6 +162,13 @@ export const UpdatePerfume = ({ perfume, onClose, onUpdate }) => {
           <button className="btn btn-secondary" onClick={onClose}>Cancelar</button>
         </form>
       </div>
+      {serverResponse.notification && (
+        <ToastMessage
+          message={serverResponse.notification}
+          type={serverResponse.success ? "green" : "red"}
+          onClose={() => setServerResponse({ ...serverResponse, notification: null })}
+        />
+      )}
     </section>
   )
 }

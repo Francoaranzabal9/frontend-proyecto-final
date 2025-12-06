@@ -407,6 +407,11 @@ h3 {
   gap: 1rem;
 }
 
+.error {
+  color: red;
+  font-size: 0.85rem;
+}
+
 .auth-input {
   padding: 0.5rem 0.75rem;
   border: 1px solid #e0e0e0;
@@ -428,6 +433,19 @@ h3 {
   margin-top: 1rem;
   font-size: 0.9rem;
   color: #555;
+}
+
+.auth-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-footer p {
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .auth-link a {

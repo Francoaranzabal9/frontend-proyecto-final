@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ToastMessage from "../components/ToastMessage";
 
 const Register = () => {
 
@@ -8,6 +9,11 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+  })
+
+  const [serverResponse, setServerResponse] = useState({
+    success: null,
+    notification: null,
   })
 
   const navigate = useNavigate()
@@ -21,6 +27,23 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (formData.name.length < 3) {
+      setServerResponse({
+        success: false,
+        notification: "El nombre debe tener al menos 3 caracteres"
+      })
+      return
+    }
+
+    if (formData.password.length < 6) {
+      setServerResponse({
+        success: false,
+        notification: "La contraseña debe tener al menos 6 caracteres"
+      })
+      return
+    }
+
     try {
       const response = await fetch(`https://api-sello-dorado.onrender.com/auth/register`, {
         method: "POST",
@@ -32,15 +55,28 @@ const Register = () => {
       const responseData = await response.json()
 
       if (responseData.error) {
-        alert(responseData.error)
+        setServerResponse({
+          success: false,
+          notification: responseData.error
+        })
         return
       }
 
-      alert("Usuario registrado exitosamente")
+      setServerResponse({
+        success: true,
+        notification: "Usuario registrado exitosamente"
+      })
 
-      navigate("/login")
+      setTimeout(() => {
+        navigate("/login")
+      }, 2000)
+
     } catch (error) {
       console.log(error)
+      setServerResponse({
+        success: false,
+        notification: responseData.error || "Error de conexión"
+      })
     }
   }
 
@@ -79,6 +115,13 @@ const Register = () => {
           <button className="btn btn-primary" type="submit">Registrarse</button>
         </form>
       </div>
+      {serverResponse.notification && (
+        <ToastMessage
+          message={serverResponse.notification}
+          type={serverResponse.success ? "green" : "red"}
+          onClose={() => setServerResponse({ ...serverResponse, notification: null })}
+        />
+      )}
     </Layout>
   );
 };

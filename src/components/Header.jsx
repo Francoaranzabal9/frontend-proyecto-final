@@ -34,6 +34,11 @@ const Header = () => {
           </div>
           <Link to="/" className="nav-link" onClick={closeMenu}>Productos</Link>
           <Link to="/sobre-nosotros" className="nav-link" onClick={closeMenu}>Nosotros</Link>
+
+          {user?.role === 'admin' && (
+            <Link to="/dashboard" className="nav-link" onClick={closeMenu}>Dashboard</Link>
+          )}
+
           {
             !user ? (
               <>
@@ -42,7 +47,9 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link to="/agregar-producto" className="nav-link" onClick={closeMenu}>Agregar Producto</Link>
+                {user?.role === 'admin' && (
+                  <Link to="/agregar-producto" className="nav-link" onClick={closeMenu}>Agregar Producto</Link>
+                )}
                 <Link to="/contacto" className="nav-link" onClick={closeMenu}>Contacto</Link>
                 <button onClick={() => { logout(); closeMenu(); }} className="btn-logout">Cerrar sesión</button>
               </>

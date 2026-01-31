@@ -76,7 +76,7 @@ const OrderDetail = () => {
 
         <div className="detail-grid">
           {/* Card: Información de Envío/Cliente */}
-          <div className="detail-card client-card">
+          <div className="detail-card ">
             <h3><FaUser className="card-icon" /> Datos del Cliente</h3>
             <div className="info-row">
               <span className="label">Nombre:</span>
@@ -92,7 +92,7 @@ const OrderDetail = () => {
             </div>
           </div>
 
-          <div className="detail-card shipping-card">
+          <div className="detail-card">
             <h3><FaMapMarkerAlt className="card-icon" /> Dirección de Envío</h3>
             <div className="info-row">
               <span className="label">Dirección:</span>
@@ -109,7 +109,7 @@ const OrderDetail = () => {
           </div>
 
           {/* Card: Items del Pedido */}
-          <div className="detail-card items-card">
+          <div className="detail-card ">
             <h3><FaBoxOpen className="card-icon" /> Productos ({items.length})</h3>
             <ul className="items-list">
               {items.map((item, index) => (
@@ -129,7 +129,7 @@ const OrderDetail = () => {
           </div>
 
           {/* Card: Info de Pago */}
-          <div className="detail-card payment-card">
+          <div className="detail-card ">
             <h3><FaCreditCard className="card-icon" /> Información de Pago</h3>
             <div className="info-row">
               <span className="label">Método:</span>

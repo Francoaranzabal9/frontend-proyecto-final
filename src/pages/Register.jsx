@@ -45,7 +45,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch(`https://api-sello-dorado.onrender.com/auth/register`, {
+      const response = await fetch(`http://localhost:2222/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -21,7 +21,10 @@ const AuthProvider = ({ children }) => {
   const [isSessionExpired, setIsSessionExpired] = useState(false)
 
   const login = (token) => {
-    setUser(decodeJWT(token))
+    const decoded = decodeJWT(token);
+    console.log("LOGIN DEBUG - Token:", token);
+    console.log("LOGIN DEBUG - Decoded User:", decoded);
+    setUser(decoded)
     setToken(token)
     localStorage.setItem("token", token)
     setIsSessionExpired(false)

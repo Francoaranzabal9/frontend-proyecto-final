@@ -222,8 +222,8 @@ const Checkout = () => {
                       <p>Realiza la transferencia a la siguiente cuenta:</p>
                       <div className="bank-info">
                         <p><strong>Cuenta:</strong> Pedro Sarobe</p>
-                        <p><strong>CBU:</strong> 0000003100000000000000</p>
-                        <p><strong>Alias:</strong> SELLO.DORADO.PAGO</p>
+                        <p><strong>CBU:</strong> 0000003100088897765228</p>
+                        <p><strong>Alias:</strong> elsellodorado.mp</p>
                         <p>Envía el comprobante a elsellodorado25@gmail.com</p>
                       </div>
                     </div>

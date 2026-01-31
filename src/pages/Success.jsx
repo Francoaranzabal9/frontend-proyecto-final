@@ -27,9 +27,9 @@ const Success = () => {
         setOrderId(mpPaymentId || externalRef); // Preferimos mostrar ID de pago
         clearCart(); // ¡IMPORTANTE! Vaciar carrito al volver exitoso de MP
 
-        // Disparar envío de email de confirmación (ya que se deshabilitó en el backend al crear la orden)
-        // Usamos external_reference que es el ID de la orden en nuestra DB
+        // Disparar envío de email de confirmación
         if (externalRef) {
+          console.log("Enviando request de confirmación a localhost para order:", externalRef);
           fetch(`http://localhost:2222/payment/confirm-email/${externalRef}`, { method: 'POST' })
             .then(res => {
               if (res.ok) console.log("Email de confirmación enviado");

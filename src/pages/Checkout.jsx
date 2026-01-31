@@ -87,7 +87,7 @@ const Checkout = () => {
       } else {
 
         clearCart();
-        navigate("/success", { state: { orderId: data.orderId } });
+        navigate("/pending", { state: { orderId: data.orderId } });
       }
 
     } catch (err) {

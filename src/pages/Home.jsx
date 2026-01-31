@@ -346,7 +346,7 @@ const Home = () => {
                   </div>
                   <p className="card-price">${p.price}</p>
                   {
-                    user && (
+                    user?.role === 'admin' && (
                       <div className="card-actions">
                         <button onClick={() => handleUpdatePerfume(p)} className="btn btn-primary">Actualizar</button>
                         <button onClick={() => deletePerfume(p._id)} className="btn btn-danger">Eliminar</button>
@@ -355,7 +355,7 @@ const Home = () => {
                   }
                 </div>
               </div>))}
-              {user && outOfStockPerfumes.map((p, i) => (<div key={p._id} className="perfume-card">
+              {user?.role === 'admin' && outOfStockPerfumes.map((p, i) => (<div key={p._id} className="perfume-card">
                 <div className="card-image-container">
                   <img src={p.image} alt={`Imagen de ${p.name}`} className="perfume-image" />
                 </div>
@@ -372,7 +372,7 @@ const Home = () => {
                     <p className="out-of-stock">Agotado</p>
                   </div>
                   {
-                    user && (
+                    user?.role === 'admin' && (
                       <div className="card-actions">
                         <button onClick={() => handleUpdatePerfume(p)} className="btn btn-primary">Actualizar</button>
                         <button onClick={() => deletePerfume(p._id)} className="btn btn-danger">Eliminar</button>

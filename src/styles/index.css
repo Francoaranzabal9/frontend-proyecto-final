@@ -3121,3 +3121,137 @@ h3 {
   /* Remove lift effect if present */
   text-decoration: none;
 }
+
+/* Checkout Mobile Optimization (< 370px) */
+@media (max-width: 370px) {
+  .checkout-container {
+    padding: 0 0.5rem;
+    /* Margen externo mínimo */
+    margin-bottom: 2rem;
+    overflow-x: hidden;
+    /* Prevenir scroll horizontal */
+  }
+
+  .checkout-form {
+    width: 100%;
+  }
+
+  .checkout-form-section,
+  .checkout-summary-card {
+    padding: 1rem 0.6rem;
+    /* Padding interno reducido pero existente */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Asegurar que el formulario no fuerce ancho */
+  .checkout-form {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .page-banner {
+    font-size: 1.3rem;
+    margin: 1rem 0;
+  }
+
+  .checkout-form h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.8rem;
+    width: 100%;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .auth-input {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+    /* Letra más pequeña para que entre el mail */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .bank-info p,
+  .transfer-details p {
+    font-size: 0.75rem;
+    /* Ajuste para datos bancarios y correo */
+    word-break: break-word;
+    /* Evita desbordes si es muy largo */
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .payment-methods {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .payment-option {
+    padding: 0.6rem;
+    min-height: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .payment-icon {
+    font-size: 1.1rem;
+  }
+
+  .payment-icon-text {
+    font-size: 0.9rem;
+  }
+
+  .payment-option span {
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .summary-item {
+    font-size: 0.85rem;
+  }
+
+  .summary-item .item-name {
+    font-size: 0.8rem;
+  }
+
+  .summary-item .item-price {
+    font-size: 0.8rem;
+  }
+
+  .summary-total {
+    font-size: 1rem;
+  }
+
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    white-space: normal;
+    height: auto;
+  }
+
+  .footer-description {
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .footer-main {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 3px;
+  }
+
+}

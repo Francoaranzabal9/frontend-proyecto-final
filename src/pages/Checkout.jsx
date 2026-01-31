@@ -214,18 +214,6 @@ const Checkout = () => {
                   {paymentMethod === 'mp' && (
                     <div className="mp-details">
                       <p>Serás redirigido a Mercado Pago para completar tu compra de forma segura.</p>
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px', minHeight: '60vh' }}>
-                        <p>Haz clic en el botón para realizar el pago.</p>
-
-                        {/* Renderiza el botón de pago */}
-                        <div style={{ width: '300px' }}>
-                          {preferenceId ? (
-                            <Wallet initialization={{ preferenceId: preferenceId }} />
-                          ) : (
-                            <p style={{ textAlign: 'center' }}>Generando orden de pago...</p>
-                          )}
-                        </div>
-                      </div>
                     </div>
                   )}
 
@@ -243,11 +231,14 @@ const Checkout = () => {
                 </div>
               </div>
 
-              {paymentMethod !== 'mp' && (
-                <button type="submit" className="btn btn-primary submit-btn" disabled={isProcessing}>
-                  {isProcessing ? "Procesando..." : `Pagar $${getCartTotal()}`}
-                </button>
-              )}
+              <button type="submit" className="btn btn-primary submit-btn" disabled={isProcessing}>
+                {isProcessing
+                  ? "Procesando..."
+                  : paymentMethod === 'mp'
+                    ? "Continuar a Mercado Pago"
+                    : `Finalizar Pedido ($${getCartTotal()})`
+                }
+              </button>
             </form>
           </div>
 

@@ -65,8 +65,10 @@ const Cart = () => {
                 <span>Total</span>
                 <span>${getCartTotal()}</span>
               </div>
-              <button className="btn btn-primary btn-checkout">Finalizar Compra</button>
-              <button onClick={clearCart} className="btn btn-secondary btn-clear">Vaciar Carrito</button>
+              <div className="cart-summary-actions">
+                <Link to="/checkout" className="btn btn-primary btn-checkout">Finalizar Compra</Link>
+                <button onClick={clearCart} className="btn btn-secondary btn-clear">Vaciar Carrito</button>
+              </div>
             </div>
           </div>
         )}

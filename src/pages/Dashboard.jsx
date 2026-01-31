@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch("http://localhost:2222/payment/orders");
+      const response = await fetch("https://api-sello-dorado.onrender.com/payment/orders");
       if (!response.ok) {
         throw new Error("No se pudieron cargar las órdenes");
       }
@@ -53,7 +53,7 @@ const Dashboard = () => {
 
     try {
       // Usar endpoint PATCH para actualizar estado
-      const response = await fetch(`http://localhost:2222/payment/orders/${orderId}`, {
+      const response = await fetch(`https://api-sello-dorado.onrender.com/payment/orders/${orderId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -66,7 +66,7 @@ const Checkout = () => {
         paymentMethod: paymentMethod
       };
 
-      const response = await fetch('http://localhost:2222/payment/create-order', {
+      const response = await fetch('https://api-sello-dorado.onrender.com/payment/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

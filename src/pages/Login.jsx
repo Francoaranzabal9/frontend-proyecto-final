@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch(`http://localhost:2222/auth/login`, {
+      const response = await fetch(`https://api-sello-dorado.onrender.com/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

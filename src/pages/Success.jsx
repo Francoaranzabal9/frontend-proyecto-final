@@ -30,7 +30,7 @@ const Success = () => {
         // Disparar envío de email de confirmación
         if (externalRef) {
           console.log("Enviando request de confirmación a localhost para order:", externalRef);
-          fetch(`http://localhost:2222/payment/confirm-email/${externalRef}`, { method: 'POST' })
+          fetch(`https://api-sello-dorado.onrender.com/payment/confirm-email/${externalRef}`, { method: 'POST' })
             .then(res => {
               if (res.ok) console.log("Email de confirmación enviado");
               else console.error("Error al enviar email de confirmación");

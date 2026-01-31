@@ -15,7 +15,7 @@ const OrderDetail = () => {
 
   const fetchOrderDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:2222/payment/orders/${id}`);
+      const response = await fetch(`https://api-sello-dorado.onrender.com/payment/orders/${id}`);
       if (!response.ok) {
         throw new Error("No se pudo cargar la orden");
       }
